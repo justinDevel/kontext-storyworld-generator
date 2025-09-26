@@ -9,7 +9,7 @@ An **Interactive Multi-Modal Storyworld Generator** powered by **FLUX.1 Kontext 
 ### 🎭 Core Functionality
 - **Interactive Storytelling**: User actions drive branching narratives.
 - **AI-Generated Visuals**: Scene images dynamically created via FLUX.1 Kontext [dev].
-- **Image Editing**: Refine or transform scenes using FAL.ai image editing.
+- **Image Editing**: image editing Refine or transform scenes using FLUX.1 Kontext via FAL.ai .
 - **Video Generation**: Cinematic clips from images, animations, and narration.
 - **Voice Narration**: Natural TTS speech via ElevenLabs.
 - **Export Stories**: Download complete stories (text, images, videos, audio) as zip.
