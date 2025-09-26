@@ -23,7 +23,7 @@ export async function generateStoryContent(
 ): Promise<FalFluxResponse> {
   try {
     getFalClient(); 
-    const result = await fal.subscribe('fal-ai/recraft-v3', {
+    const result = await fal.subscribe('fal-ai/flux-1/dev', {
       input: {
         prompt: `Continue this interactive story based on user action: "${userAction}". 
                  Story history: ${storyHistory.join(' ')}. 
