@@ -5,7 +5,7 @@ import { StoryInterface } from './components/StoryInterface';
 
 function App() {
   const [currentView, setCurrentView] = useState<'hero' | 'story'>('hero');
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
 
   useEffect(() => {
