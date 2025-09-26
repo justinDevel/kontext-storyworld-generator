@@ -318,7 +318,7 @@ export function ImageGallery({ entries, darkMode, onGenerateVideo, onEditImage }
           }
           imageUrl={videoModalEntry.imageUrl!}
           defaultPrompt={videoModalEntry.storyText}
-          isGenerating={videoModalEntry.isGeneratingVideo || false}
+          isGenerating={videoModalEntry.isGenerating || false}
           darkMode={darkMode}
         />
       )}
