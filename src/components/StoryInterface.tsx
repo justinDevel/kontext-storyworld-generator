@@ -300,14 +300,14 @@ Credits Used: ${state.totalCreditsUsed}
               </div>
               
               {/* Dark Mode Toggle */}
-              <div className="flex items-center gap-2">
+              {/* <div className="flex items-center gap-2">
                 <Sun className="w-4 h-4 text-white/80" />
                 <Switch
                   checked={darkMode}
                   onCheckedChange={onToggleDarkMode}
                 />
                 <Moon className="w-4 h-4 text-white/80" />
-              </div>
+              </div> */}
               
               {/* Export Button */}
               {state.entries.length > 0 && (
