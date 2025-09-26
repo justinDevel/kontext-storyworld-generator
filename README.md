@@ -49,4 +49,8 @@ npm install
 ```bash
 npm run dev
 ```
+Now Go to the app url usualy `http://localhost:5173/` 
+then click on *Start Creating* 
+Click on the gear icon in the header 
+put your API keys
 
