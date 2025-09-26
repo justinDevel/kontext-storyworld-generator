@@ -6,7 +6,8 @@ import { Modal, ModalContent, ModalTrigger, ModalTitle } from './ui/Modal';
 import { VideoGenerationModal } from './VideoGenerationModal';
 import { ImageEditModal } from './ImageEditModal';
 import ReactPlayer, { ReactPlayerProps } from "react-player";
-
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 
 import { Loader2, Image as ImageIcon, Expand, Video, Play, CreditCard as Edit, X } from 'lucide-react'
 import { useState } from 'react';
@@ -123,7 +124,7 @@ export function ImageGallery({ entries, darkMode, onGenerateVideo, onEditImage }
                             className="bg-green-600 backdrop-blur-sm rounded-full p-2 shadow-lg hover:bg-green-700 transition-colors duration-200"
                             onClick={(e) => {
                               e.stopPropagation();
-                            
+
                               setIsOpen(true);
                               // window.open(entry.videoUrl, '_blank');
                             }}
@@ -172,77 +173,81 @@ export function ImageGallery({ entries, darkMode, onGenerateVideo, onEditImage }
                             </motion.button>
                           </ModalTrigger>
                           <ModalContent
-                            className={`max-w-4xl max-h-[90vh] overflow-y-auto ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white'
+                            className={`max-w-4xl ${darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white'
                               }`}
                           >
                             <ModalTitle className="sr-only">Scene Gallery</ModalTitle>
+                            <PerfectScrollbar
+                              style={{ maxHeight: '90vh', padding: '1rem' }}
+                              options={{ suppressScrollX: true }}
+                            >
+                              <div className="p-4 space-y-6">
 
-                            <div className="p-4 space-y-6">
-
-                              <div>
-                                <img
-                                  src={entry.imageUrl}
-                                  alt="Main expanded scene"
-                                  className="w-full h-auto rounded-lg shadow-2xl"
-                                />
-                              </div>
-
-
-                              {entry.videoUrl && (
                                 <div>
-                                  <h3
-                                    className={`text-lg font-semibold mb-3 ${darkMode ? 'text-white' : 'text-gray-900'
+                                  <img
+                                    src={entry.imageUrl}
+                                    alt="Main expanded scene"
+                                    className="w-full h-auto rounded-lg shadow-2xl"
+                                  />
+                                </div>
+
+
+                                {entry.videoUrl && (
+                                  <div>
+                                    <h3
+                                      className={`text-lg font-semibold mb-3 ${darkMode ? 'text-white' : 'text-gray-900'
+                                        }`}
+                                    >
+                                      Generated Video
+                                    </h3>
+                                    <video
+                                      controls
+                                      className="w-full rounded-lg shadow-lg"
+                                      poster={entry.imageUrl}
+                                    >
+                                      <source src={entry.videoUrl} type="video/mp4" />
+                                      Your browser does not support the video tag.
+                                    </video>
+                                  </div>
+                                )}
+
+
+                                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                  {[...Array(6)].map((_, idx) => (
+                                    <motion.div
+                                      key={idx}
+                                      initial={{ opacity: 0, scale: 0.8 }}
+                                      animate={{ opacity: 1, scale: 1 }}
+                                      transition={{ delay: idx * 0.1 }}
+                                      className="relative group cursor-pointer"
+                                    >
+                                      <img
+                                        src={entry.imageUrl}
+                                        alt={`Scene variation ${idx + 1}`}
+                                        className="w-full h-24 object-cover rounded-md group-hover:scale-105 transition-transform duration-300"
+                                      />
+                                      <div
+                                        className={`absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                                      />
+                                    </motion.div>
+                                  ))}
+                                </div>
+
+                                {entry.userAction && (
+                                  <div
+                                    className={`p-4 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-gray-50'
                                       }`}
                                   >
-                                    Generated Video
-                                  </h3>
-                                  <video
-                                    controls
-                                    className="w-full rounded-lg shadow-lg"
-                                    poster={entry.imageUrl}
-                                  >
-                                    <source src={entry.videoUrl} type="video/mp4" />
-                                    Your browser does not support the video tag.
-                                  </video>
-                                </div>
-                              )}
-
-
-                              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                                {[...Array(6)].map((_, idx) => (
-                                  <motion.div
-                                    key={idx}
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    transition={{ delay: idx * 0.1 }}
-                                    className="relative group cursor-pointer"
-                                  >
-                                    <img
-                                      src={entry.imageUrl}
-                                      alt={`Scene variation ${idx + 1}`}
-                                      className="w-full h-24 object-cover rounded-md group-hover:scale-105 transition-transform duration-300"
-                                    />
-                                    <div
-                                      className={`absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                                    />
-                                  </motion.div>
-                                ))}
+                                    <p
+                                      className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'
+                                        }`}
+                                    >
+                                      <strong>Scene Context:</strong> {entry.userAction}
+                                    </p>
+                                  </div>
+                                )}
                               </div>
-
-                              {entry.userAction && (
-                                <div
-                                  className={`p-4 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-gray-50'
-                                    }`}
-                                >
-                                  <p
-                                    className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'
-                                      }`}
-                                  >
-                                    <strong>Scene Context:</strong> {entry.userAction}
-                                  </p>
-                                </div>
-                              )}
-                            </div>
+                            </PerfectScrollbar>
                           </ModalContent>
 
                         </Modal>
@@ -331,24 +336,24 @@ export function ImageGallery({ entries, darkMode, onGenerateVideo, onEditImage }
             if (!editModalEntry) return;
 
             try {
-            
+
               setEditModalEntry(prev => prev ? { ...prev, isEditing: true } : prev);
 
               try {
                 if (onEditImage) {
-                  await onEditImage(editModalEntry.id, prompt); 
+                  await onEditImage(editModalEntry.id, prompt);
                 }
               } catch (error) {
                 console.error("Failed to edit image:", error);
               } finally {
-               
+
                 setEditModalEntry(prev => prev ? { ...prev, isEditing: false } : prev);
                 setEditModalEntry(null)
               }
             } catch (error) {
               console.error("Failed to edit image:", error);
 
-             
+
               setEditModalEntry(prev => prev ? { ...prev, isEditing: false } : prev);
             }
           }}
