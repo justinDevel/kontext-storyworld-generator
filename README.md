@@ -43,9 +43,10 @@ An **Interactive Multi-Modal Storyworld Generator** powered by **FLUX.1 Kontext 
 git clone https://github.com/justinDevel/kontext-storyworld-generator.git
 cd kontext-storyworld-generator
 npm install
-
+```
 ### Start the app
 
 ```bash
 npm run dev
+```
 
